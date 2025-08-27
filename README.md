@@ -1,17 +1,34 @@
 # Modbus_RTU_tutorial_on_ESP32
 This is a simple tutorial project on Modbus communication. Basically my PC acts as a Modbus master and sends an RTU frame via UART to me ESP32 module. The objective was to learn about Modbus communication.This project runs on an ESP32 and listens for Modbus RTU messages sent over UART (serial port). When a Modbus frame arrives, it checks if the message is valid, analyzes its contents (like function code, addresses, and CRC), and prints a detailed breakdown to the serial console. It's designed to help you learn how Modbus RTU communication works by showing exactly what each message contains and how the protocol operates. It does not control any hardware outputs—it's focused on receiving, parsing, and explaining Modbus frames for educational purposes.
-##Features
+## Features
 - Receives Modbus RTU frames via UART
 - Validates CRC checksums
 - Parses and displays frame contents
 - Provides detailed protocol analysis output
 - Ready for integration with Python Modbus master tools
-## File Overview
+### File Overview
 - `app_main.c`: Entry point; initializes UART and starts the Modbus frame analysis task.
 - `modbus_slave.c` / `modbus_slave.h`: Implements Modbus frame parsing, CRC validation, and protocol analysis.
 - `uart_driver.c` / `uart_driver.h`: Handles UART initialization and continuous frame reception.
 - `CMakeLists.txt`: Build configuration for ESP-IDF.
-## Getting Started
+#### Modbus RTU Frame Format
+A typical Modbus RTU frame consists of:
+
+| Field           | Size (bytes) | Description                       |
+|-----------------|--------------|-----------------------------------|
+| Slave Address   | 1            | Address of the slave device       |
+| Function Code   | 1            | Command (e.g., read/write)        |
+| Data            | N            | Data (registers, coils, etc.)     |
+| CRC (Checksum)  | 2            | Error checking (low byte first)   |
+
+**Example Frame (Hex):**
+01 03 00 00 00 02 C4 0B
+- `01`: Slave Address (1)
+- `03`: Function Code (Read Holding Registers)
+- `00 00`: Starting Address High/Low
+- `00 02`: Number of Registers High/Low
+- `C4 0B`: CRC (Low byte first)
+###### Getting Started
 1. **Requirements**
    - ESP32 development board
    - ESP-IDF installed and configured
