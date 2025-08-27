@@ -6,12 +6,12 @@ This is a simple tutorial project on Modbus communication. Basically my PC acts 
 - Parses and displays frame contents
 - Provides detailed protocol analysis output
 - Ready for integration with Python Modbus master tools
-### File Overview
+## File Overview
 - `app_main.c`: Entry point; initializes UART and starts the Modbus frame analysis task.
 - `modbus_slave.c` / `modbus_slave.h`: Implements Modbus frame parsing, CRC validation, and protocol analysis.
 - `uart_driver.c` / `uart_driver.h`: Handles UART initialization and continuous frame reception.
 - `CMakeLists.txt`: Build configuration for ESP-IDF.
-#### Modbus RTU Frame Format
+## Modbus RTU Frame Format
 A typical Modbus RTU frame consists of:
 
 | Field           | Size (bytes) | Description                       |
@@ -28,7 +28,7 @@ A typical Modbus RTU frame consists of:
 - `00 00`: Starting Address High/Low
 - `00 02`: Number of Registers High/Low
 - `C4 0B`: CRC (Low byte first)
-###### Getting Started
+## Getting Started
 1. **Requirements**
    - ESP32 development board
    - ESP-IDF installed and configured
